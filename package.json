@@ -39,5 +39,11 @@
 		"vite": "^5.0.3",
 		"vitest": "^1.2.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@nostr-dev-kit/ndk": "^2.7.1",
+		"@nostr-dev-kit/ndk-cache-dexie": "^2.3.1",
+		"@nostr-dev-kit/ndk-svelte": "^2.2.12",
+		"@skeletonlabs/skeleton": "^2.9.2"
+	}
 }
