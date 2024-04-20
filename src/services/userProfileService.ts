@@ -12,6 +12,7 @@ export class UserProfileService implements UserProfileInterface {
 		if (!userProfile.npub) {
 			userProfile = { ...userProfile, npub: userNPub, image: profileImageUrl + userNPub };
 		}
+		console.log(userProfile)
 		profileUser.set(userProfile);
 	}
 }
