@@ -1,5 +1,5 @@
 import type { UserProfileInterface } from '../interfaces/userProfileInterface';
-import { fetchUserProfile } from '../utils/helper';
+import { fetchUserProfile } from '../utils/helpers/helper';
 import { profileUser } from '../stores/stores';
 import { profileImageUrl } from '../utils/constant';
 

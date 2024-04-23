@@ -1,6 +1,6 @@
 import type { LoginStrategyInterface } from '../../interfaces/LoginStrategyInterface';
 import { ndkUser } from '../../stores/stores';
-import { NDKlogin } from '../../utils/helper';
+import { NDKlogin } from '../../utils/helpers/loginHelper';
 import { UserProfileService } from '.././userProfileService';
 
 export class NIP07LoginService implements LoginStrategyInterface {
