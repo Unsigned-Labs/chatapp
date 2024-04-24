@@ -4,15 +4,14 @@ import { profileUser } from '../stores/stores';
 import { profileImageUrl } from '../utils/constant';
 
 export class UserProfileService implements UserProfileInterface {
-	async fetchUserProfile(userPubKey: string): Promise<void> {
-		let userProfile = await fetchUserProfile(userPubKey);
+	async fetchUserProfile(userNPub: string): Promise<void> {
+		let userProfile = await fetchUserProfile(userNPub);
 		if (!userProfile || Object.entries(userProfile).length === 0) {
-			userProfile = { image: profileImageUrl + userPubKey, pubkey: userPubKey };
+			userProfile = { image: profileImageUrl + userNPub, npub: userNPub };
 		}
-		if (!userProfile.pubkey) {
-			userProfile = { ...userProfile, pubkey: userPubKey, image: profileImageUrl + userPubKey };
+		if (!userProfile.npub) {
+			userProfile = { ...userProfile, npub: userNPub, image: profileImageUrl + userNPub };
 		}
-		const profileValue = { content: userProfile };
-		profileUser.update((u) => [...u, profileValue]);
+		profileUser.set(userProfile);
 	}
 }

@@ -11,7 +11,7 @@ export class NIP07LoginService implements LoginStrategyInterface {
 			const user = await NDKlogin();
 			if (user) {
 				ndkUser.set(user);
-				this.userProfileService.fetchUserProfile(user.pubkey);
+				this.userProfileService.fetchUserProfile(user.npub);
 				return 'success';
 			} else {
 				throw new Error('NIP07 login failed.');

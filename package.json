@@ -43,6 +43,7 @@
 	"dependencies": {
 		"@nostr-dev-kit/ndk": "^2.7.1",
 		"@nostr-dev-kit/ndk-cache-dexie": "^2.3.1",
-		"@nostr-dev-kit/ndk-svelte": "^2.2.12"
+		"@nostr-dev-kit/ndk-svelte": "^2.2.12",
+		"@skeletonlabs/skeleton": "^2.9.2"
 	}
 }

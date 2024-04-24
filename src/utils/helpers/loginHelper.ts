@@ -1,7 +1,7 @@
 import { get as getStore } from 'svelte/store';
 import ndkStore from '../../stores/provider';
 import { NDKNip07Signer, NDKUser } from '@nostr-dev-kit/ndk';
-import { ndkUser } from '../../stores/stores';
+import { localStore, ndkUser } from '../../stores/stores';
 
 export async function NDKlogin(): Promise<NDKUser | undefined> {
 	const $ndk = getStore(ndkStore);
@@ -14,6 +14,6 @@ export async function NDKlogin(): Promise<NDKUser | undefined> {
 		npub: ndkCurrentUser.npub
 	});
 	ndkUser.set(user);
-	// localStore.set({ lastUserLogged: ndkCurrentUser.npub, pk: undefined });
+	localStore.set({ lastUserLogged: ndkCurrentUser.npub, pk: undefined });
 	return user;
 }
