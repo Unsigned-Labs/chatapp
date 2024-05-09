@@ -1,4 +1,6 @@
 <script>
+	import ProfileDetails from "./Common/ProfileDetails.svelte";
+
     let admins = [
         { name: 'Aaron', image: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png' },
     ];
@@ -13,7 +15,8 @@
     ];
 
 </script>
-<div class="w-[15%] overflow-scroll no-scrollbar bg-slate-700">
+<div class="w-[16%] overflow-scroll no-scrollbar bg-slate-700">
+    <ProfileDetails title="Basanta" description="Super-pro noster dev!" />
     <ul >
         <li class="text-gray-400 px-5 py-2 font-bold">Admins</li>
         {#each admins as { name, image }}
