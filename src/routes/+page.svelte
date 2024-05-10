@@ -18,4 +18,4 @@
 <br />
 <br />
 <input type="text" bind:this={inputElement} />
-<button on:click|preventDefault={nip49Login}>Login with NIP07</button>
+<button on:click|preventDefault={nip49Login}>Login with NIP49</button>

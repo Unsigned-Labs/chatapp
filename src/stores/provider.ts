@@ -8,7 +8,7 @@ let cacheAdapter: NDKCacheAdapter | undefined;
 
 if (window) {
 	cacheAdapter = new NDKCacheAdapterDexie({
-		dbName: 'walletScrutiny',
+		dbName: 'chatapp',
 		expirationTime: 3600 * 24 * 2
 	});
 }
