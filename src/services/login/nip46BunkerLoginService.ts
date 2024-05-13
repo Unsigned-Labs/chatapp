@@ -1,8 +1,7 @@
-import type { LoginStrategyInterface } from "../../interfaces/LoginStrategyInterface";
-import { ndkUser } from "../../stores/stores";
-import { nsecBunkerLogin } from "../../utils/helpers/loginHelper";
-import { UserProfileService } from "../userProfileService";
-
+import type { LoginStrategyInterface } from '../../interfaces/LoginStrategyInterface';
+import { ndkUser } from '../../stores/stores';
+import { nsecBunkerLogin } from '../../utils/helpers/loginHelper';
+import { UserProfileService } from '../userProfileService';
 
 export class BunkerLoginService implements LoginStrategyInterface {
 	userProfileService = new UserProfileService();
@@ -11,7 +10,7 @@ export class BunkerLoginService implements LoginStrategyInterface {
 			const user = await nsecBunkerLogin(nip46ConnectionString);
 			if (user) {
 				ndkUser.set(user);
-				this.userProfileService.fetchUserProfile(user.pubkey);
+				this.userProfileService.fetchUserProfile(user.npub);
 				return 'success';
 			} else {
 				console.error('nsec Bunker login failed.');
