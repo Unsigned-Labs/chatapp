@@ -1,7 +1,7 @@
 import { get as getStore } from 'svelte/store';
 import ndkStore, { bunkerNDKStore } from '../../stores/provider';
 import { NDKNip07Signer, NDKNip46Signer, NDKPrivateKeySigner, NDKUser } from '@nostr-dev-kit/ndk';
-import { localStore, ndkUser } from '../../stores/stores';
+import { localStore, ndkUser, profileUser } from '../../stores/stores';
 
 export async function NDKlogin(): Promise<NDKUser | undefined> {
 	const $ndk = getStore(ndkStore);
@@ -101,4 +101,15 @@ export async function nsecBunkerLogin(nip46ConnectionString: string): Promise<ND
 	ndkUser.set(user);
 	localStore.set({ lastUserLogged: ndkCurrentUser.npub, pk: undefined });
 	return user;
+}
+
+export function logout() {
+	ndkUser.set(null);
+	profileUser.set({});
+	localStore.update(() => {
+		return {
+			lastUserLogged: undefined,
+			pk: undefined
+		};
+	});
 }
