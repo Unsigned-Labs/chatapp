@@ -44,6 +44,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"yarn": "^1.22.22"
 		"@nostr-dev-kit/ndk": "^2.7.1",
 		"@nostr-dev-kit/ndk-cache-dexie": "^2.3.1",
 		"@nostr-dev-kit/ndk-svelte": "^2.2.12",

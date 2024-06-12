@@ -2,7 +2,7 @@
 	import Details from '../components/Details.svelte';
 	import MessageWindow from '../components/MessageWindow.svelte';
 	import ServerList from '../components/ServerList.svelte';
-	import Sidebar from '../components/Sidebar.svelte';
+	import Sidebar from '../components/contentArea/Sidebar.svelte';
 	import Header from '../components/Header.svelte';
 	import ndk from '../stores/provider';
 	import { localStore, ndkUser, profileUser } from '../stores/stores';
