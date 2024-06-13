@@ -44,10 +44,13 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@noble/hashes": "^1.4.0",
 		"@nostr-dev-kit/ndk": "^2.7.1",
 		"@nostr-dev-kit/ndk-cache-dexie": "^2.3.1",
 		"@nostr-dev-kit/ndk-svelte": "^2.2.12",
+		"@nostr-dev-kit/ndk-svelte-components": "^2.2.16",
 		"@skeletonlabs/skeleton": "^2.9.2",
+		"nostr-tools": "^2.6.0",
 		"remixicon": "^4.2.0"
 	}
 }

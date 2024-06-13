@@ -27,10 +27,12 @@
 	}
 
 	const initialization = async () => {
-		await $ndk.connect();
 		try {
 			const isloggedIn = $localStore.lastUserLogged;
 			if (isloggedIn && window) {
+				await $ndk.connect().then(() => {
+					console.log('Connected to NDK');
+				});
 				let user = $ndk.getUser({
 					npub: isloggedIn
 				});
@@ -48,7 +50,7 @@
 	onMount(initialization);
 </script>
 
-<Header/>
+<Header />
 <div class="flex h-full text-white">
 	<ServerList />
 	<Sidebar />

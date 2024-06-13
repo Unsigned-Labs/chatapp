@@ -4,7 +4,11 @@ import NDKSvelte from '@nostr-dev-kit/ndk-svelte';
 import { writable } from 'svelte/store';
 import NDK from '@nostr-dev-kit/ndk';
 
-export const defaulRelaysUrls: string[] = ['wss://purplepag.es', 'wss://relay.nostr.band'];
+export const defaulRelaysUrls: string[] = [
+	'wss://purplepag.es',
+	'wss://relay.nostr.band',
+	'wss://relay.damus.io'
+];
 let cacheAdapter: NDKCacheAdapter | undefined;
 
 if (window) {

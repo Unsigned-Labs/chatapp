@@ -1,30 +1,30 @@
-<script>
-    let messages = [
-        { author: 'Alice', message: 'Hi Bob!' },
-        { author: 'Bob', message: 'Hi Alice!' }
-    ];
-    let message = '';
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	import PrivateMessage from '../components/PrvateMessages.svelte';
+	import Button from './Common/Button.svelte';
+	import InputField from './Common/InputField.svelte';
+	let receiverNpub = '';
 
-    function sendMessage() {
-        if (message) {
-            messages = [{ author: 'You', message }, ...messages];
-            message = '';
-        }
-    }
+	let isConversationOpen = false;
 </script>
 
 <div class="bg-slate-600 w-[65%] overflow-scroll no-scrollbar">
-    <h2 class="text-5xl text-center mt-5">Message Window</h2>
-    <div class="mt-10 ">
-        <ul class="my-5 mx-5">
-            {#each messages as { author, message }}
-                <li class="text-white mb-2">
-                    <span class="font-bold">{author}:</span> {message}
-                </li>
-            {/each}
-        </ul>
-        <form on:submit|preventDefault={sendMessage} class="w-full  max-w-[65%] fixed bottom-0">
-            <input type="text" bind:value={message} class="w-full bg-gray-400 p-2 placeholder:text-gray-800" placeholder="Type a message..." />
-        </form>
-    </div>
+	<h2 class="text-5xl text-center mt-5">Message Window</h2>
+	{#if receiverNpub && isConversationOpen}
+		<PrivateMessage {receiverNpub} />
+	{:else}
+		<p class="text-white text-center mt-5">Select a user to start chatting</p>
+		<div class="flex gap-5 m-4 items-center">
+			<InputField type="text" bind:value={receiverNpub} />
+			<Button
+				label="Start Converstation"
+				onClick={() => {
+					isConversationOpen = !isConversationOpen;
+					if (receiverNpub) {
+						goto(`?user=${receiverNpub}`);
+					}
+				}}
+			/>
+		</div>
+	{/if}
 </div>
