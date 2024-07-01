@@ -1,48 +1,26 @@
 <script lang="ts">
-	import { unwrap } from '$lib/conversation/giftWrap';
-	import { getPublicKey, nip19 } from 'nostr-tools';
+	import { getPublicKey } from 'nostr-tools';
 	import ndk from '../stores/provider';
 	import type { decryptedMessage } from '$lib/conversation/types';
-	import { onMount } from 'svelte';
-	import { sendMessage } from '$lib/conversation';
+	import { NIP17PrivateDM } from '../services/conversation/nip17PrivateDM';
 
-	export let receiverNpub: string;
-
-	let decryptedMessages: decryptedMessage[] = [];
+	export let receiverPubKey: string;
+	export let messages: decryptedMessage[] = [];
 	let message = '';
-
-	const receiver = nip19.decode(receiverNpub).data as string;
 
 	const userPrivateKey = $ndk.signer?.privateKey;
 	const userPublicKey = getPublicKey(userPrivateKey);
-	const giftWrapSub = $ndk.subscribe({
-		kinds: [1059 as number],
-		'#p': [userPublicKey]
-	});
-	giftWrapSub.on('event', async (event) => {
-		const unwrapped = await unwrap(event, userPrivateKey);
-		const newMessage = {
-			// created_at: unwrapped.created_at,
-			author: unwrapped.pubkey === userPublicKey ? 'You' : 'Them',
-			message: unwrapped.content
-		};
-		// privateMessages.update((messages) => [...messages, newMessage]);
-		decryptedMessages.push(newMessage);
-		decryptedMessages = decryptedMessages;
-	});
-
-	onMount(async () => {
-		await giftWrapSub.start();
-	});
 
 	async function handleSubmit() {
 		if (message) {
-			await sendMessage($ndk, message, receiver, userPrivateKey);
-			decryptedMessages.push({
-				author: 'You',
-				message: message
-			});
-			decryptedMessages = decryptedMessages;
+			const value = await new NIP17PrivateDM().sendMessage(
+				$ndk,
+				message,
+				receiverPubKey,
+				userPrivateKey
+			);
+			await new NIP17PrivateDM().sendMessage($ndk, message, userPublicKey, userPrivateKey);
+			console.log(value);
 		}
 		message = '';
 	}
@@ -50,12 +28,10 @@
 
 <div class="mt-10">
 	<ul class="my-5 mx-5">
-		{#each decryptedMessages as { author, message }}
+		{#each messages.sort((a, b) => a.created_at - b.created_at) as { content, author }}
 			<li class="text-white mb-2">
 				<span class="font-bold">{author}:</span>
-				<!-- <Name {$ndk} pubkey={author} />
-					<Name {$ndk} pubkey={author} class="font-medium text-lg" /> -->
-				{message}
+				{content}
 			</li>
 		{/each}
 	</ul>

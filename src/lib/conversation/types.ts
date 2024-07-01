@@ -1,5 +1,11 @@
 export type decryptedMessage = {
-	// created_at: number;
+	id: string;
+	created_at: number;
+	content: string;
 	author: string;
-	message: string;
+};
+
+export type decryptedGroupedMessage = {
+	author: string;
+	messages: decryptedMessage[];
 };

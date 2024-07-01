@@ -53,7 +53,9 @@
 <Header />
 <div class="flex h-full text-white">
 	<ServerList />
-	<Sidebar />
+	{#if $ndk.signer}
+		<Sidebar />
+	{/if}
 	<MessageWindow />
 	<Details />
 </div>
